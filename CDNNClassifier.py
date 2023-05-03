@@ -86,25 +86,3 @@ class CDNNClassifier(BaseEstimator, ClassifierMixin):
         label=min(theta, key=theta.get)
         y_pred.append(label)
       return np.array(y_pred)
-
-
-# Load the datasets into a pandas DataFrame
-df = pd.read_csv('C:/Users/91830/Downloads/ECDNN-main/hmdbRSMXPool_7030train.csv')
-
-# Split the DataFrame into training and testing sets
-X = df.drop('feature_1', axis=1)
-y = df['feature_1']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Instantiate the CDNNClassifier with n_neighbors=5 and distance_metric='euclidean'
-cdnn = CDNNClassifier(n_neighbors=5, distance_metric='euclidean')
-
-# Fit the classifier using the training data
-cdnn.fit(X_train, y_train)
-
-# Make predictions on the testing data
-y_pred = cdnn.predict(X_test)
-
-# Compute the accuracy of the classifier
-accuracy = accuracy_score(y_test, y_pred)
-print("Accuracy:", accuracy)
