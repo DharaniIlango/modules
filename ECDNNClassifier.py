@@ -98,26 +98,3 @@ class ECDNNClassifier(BaseEstimator, ClassifierMixin):
         y_pred[~single_key]=np.array(y_pred_h)  
 
         return y_pred
-      
-      
-# Load the datasets into a pandas DataFrame
-df = pd.read_csv('C:/Users/91830/Downloads/ECDNN-main/hmdbRSMXPool_7030train.csv')
-
-# Split the DataFrame into training and testing sets
-X = df.drop('feature_1', axis=1)
-y = df['feature_1']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Instantiate the CDNNClassifier with n_neighbors=5 and distance_metric='euclidean'
-ecdnn = ECDNNClassifier(n_neighbors=5, distance_metric='euclidean')
-
-# Fit the classifier using the training data
-ecdnn.fit(X_train, y_train)
-
-# Make predictions on the testing data
-y_pred = ecdnn.predict(X_test)
-N
-# Compute the accuracy of the classifier
-accuracy = accuracy_score(y_test, y_pred)
-print("Accuracy:", accuracy)
-
